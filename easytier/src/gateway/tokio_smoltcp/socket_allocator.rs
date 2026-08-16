@@ -24,8 +24,8 @@ pub struct BufferSize {
 impl Default for BufferSize {
     fn default() -> Self {
         BufferSize {
-            tcp_rx_size: 8192,
-            tcp_tx_size: 8192,
+            tcp_rx_size: 1024 * 128,
+            tcp_tx_size: 1024 * 128,
 
             udp_rx_size: 8192,
             udp_tx_size: 8192,
