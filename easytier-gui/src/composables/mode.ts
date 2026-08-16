@@ -41,7 +41,7 @@ export function loadMode(): Mode {
         }
         return mode
     } else {
-        if (type === 'android') {
+        if (type() === 'android') {
             return {
                 mode: 'normal',
                 config_server_url: 'udp://frp.aliyun.rcco.top:22020/cieyget'
