@@ -423,6 +423,11 @@ config-server:
     完整URL：udp://127.0.0.1:22020/admin
     仅用户名：admin（使用官方服务器）
     留空：不连接配置服务器
+  hostname: 设备主机名
+  hostname_placeholder: 例如：my-android-phone（留空使用系统默认）
+  hostname_description: |
+    设备主机名，将显示在配置服务器的设备面板上。
+    安卓设备系统默认主机名为 localhost，建议手动设置一个易于识别的名称。
   connection_status: 连接状态
   connected: ": 已连接"
   disconnected: ": 未连接"

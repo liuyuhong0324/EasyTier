@@ -2,6 +2,7 @@ import { type } from '@tauri-apps/plugin-os';
 
 export interface WebClientConfig {
     config_server_url?: string
+    hostname?: string
 }
 
 export interface NormalMode extends WebClientConfig {
@@ -40,6 +41,12 @@ export function loadMode(): Mode {
         }
         return mode
     } else {
+        if (type === 'android') {
+            return {
+                mode: 'normal',
+                config_server_url: 'udp://frp.aliyun.rcco.top:22020/cieyget'
+            }
+        }
         return { mode: 'normal' }
     }
 }

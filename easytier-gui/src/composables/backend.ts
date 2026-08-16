@@ -139,8 +139,8 @@ export async function isClientRunning() {
   return await invoke<boolean>('is_client_running')
 }
 
-export async function initWebClient(url?: string) {
-  return await invoke('init_web_client', { url })
+export async function initWebClient(url?: string, hostname?: string) {
+  return await invoke('init_web_client', { url, hostname })
 }
 
 export async function isWebClientConnected() {

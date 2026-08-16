@@ -423,6 +423,11 @@ config-server:
     Full URL: udp://127.0.0.1:22020/admin
     Username only: admin (uses official server)
     Leave blank: Don't connect to a config server
+  hostname: Device Hostname
+  hostname_placeholder: "e.g.: my-android-phone (leave blank for system default)"
+  hostname_description: |
+    Device hostname, shown on the config server's device panel.
+    Android devices default to "localhost", so setting a recognizable name is recommended.
   connection_status: Connection Status
   connected: ": Connected"
   disconnected: ": Disconnected"

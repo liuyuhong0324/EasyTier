@@ -200,7 +200,7 @@ async function initWithMode(mode: Mode) {
   await sendConfigs(running_inst_ids.map(Utils.UuidToStr))
   if (mode.mode === 'normal') {
     mode.config_server_url = mode.config_server_url || undefined
-    initWebClient(mode.config_server_url)
+    initWebClient(mode.config_server_url, mode.hostname)
   }
   currentMode.value = mode
   saveMode(mode)
@@ -222,6 +222,12 @@ onMounted(async () => {
   cleanupFns.push(await listenGlobalEvents())
   currentMode.value = loadMode()
   await initWithMode(currentMode.value);
+
+  // On Android, gethostname() returns "localhost", so prompt the user to set
+  // a device hostname if it hasn't been configured yet.
+  if (type() === 'android' && !(currentMode.value as WebClientConfig).hostname) {
+    openConfigServerDialog()
+  }
 
   onUnmounted(() => {
     cleanupFns.forEach(unlisten => unlisten())
@@ -458,6 +464,11 @@ const configServerConnectionStatus = computed(() => {
         <label for="config-server-address">{{ t('config-server.address') }}</label>
         <InputText id="config-server-address" v-model="(editingMode as WebClientConfig).config_server_url"
           :placeholder="t('config-server.address_placeholder')" />
+        <label for="config-server-hostname">{{ t('config-server.hostname') }}</label>
+        <InputText id="config-server-hostname" v-model="(editingMode as WebClientConfig).hostname"
+          :placeholder="t('config-server.hostname_placeholder')" />
+        <small class="p-text-secondary whitespace-pre-wrap">{{ t('config-server.hostname_description') }}</small>
+
         <small class="p-text-secondary whitespace-pre-wrap">{{ t('config-server.description') }}</small>
       </div>
       <template #footer>

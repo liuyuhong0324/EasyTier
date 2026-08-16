@@ -477,7 +477,7 @@ async fn is_client_running() -> Result<bool, String> {
 }
 
 #[tauri::command]
-async fn init_web_client(app: AppHandle, url: Option<String>) -> Result<(), String> {
+async fn init_web_client(app: AppHandle, url: Option<String>, hostname: Option<String>,) -> Result<(), String> {
     let mut web_client_guard = WEB_CLIENT.write().await;
     let Some(url) = url else {
         *web_client_guard = None;
@@ -502,7 +502,7 @@ async fn init_web_client(app: AppHandle, url: Option<String>) -> Result<(), Stri
             explicit_machine_id: None,
             state_dir: Some(machine_id_state_dir),
         },
-        None,
+        hostname,
         false,
         instance_manager,
         Some(hooks),
